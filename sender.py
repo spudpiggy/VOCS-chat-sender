@@ -3,7 +3,6 @@ from pythonosc import udp_client
 #from pythonosc import osc_server
 import tomllib as toml
 import argparse
-import sys
 import curses
 
 with open('config.toml', 'rb') as f:
@@ -18,28 +17,25 @@ else:
 		for n in config['targets']:
 			tmp_dev = config['targets'][str(n)]
 			tmp_name = tmp_dev['name']
-			tmp_ip = tmp_dev['ip']
+			tmp_ip = str(tmp_dev['ip'])
 			tmp_port = tmp_dev['port']
 			print("""#{}
 			\tName: {}
 			\tIP: {}
 			\tPort: {}""".format(n,tmp_name,tmp_ip,tmp_port))
-		tmp_choice = str(input("Choose a device.\n"))
+		tmp_choice = str(int(input("Choose a device.\n")))
 		try:
 			device = config['targets'][tmp_choice]
 		except:
 			print("Invalid ID! Please try again.")
 		else:
 			tmp_valid = True
-			ip = tmp_ip
-			port = tmp_port
+			ip = device['ip']
+			port = device['port']
 
-#client = udp_client.SimpleUDPClient(ip, port)
-def getch():
-    screen = curses.initscr()
-    print(screen.getch())
+client = udp_client.SimpleUDPClient(ip, port)
 
-
+#screen = curses.initscr()
 while True:
-	getch()
-	#client.send_message("/chatbox/input", [ str(msgOutput), True, False])
+	msg = str(input(''))
+	client.send_message("/chatbox/input", [ msg, True, False])
