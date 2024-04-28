@@ -1,6 +1,10 @@
-import pythonosc as osc
+from pythonosc import udp_client
+#from pythonosc.dispatcher import Dispatcher
+#from pythonosc import osc_server
 import tomllib as toml
 import argparse
+import sys
+import curses
 
 with open('config.toml', 'rb') as f:
 	config = toml.load(f)
@@ -20,10 +24,22 @@ else:
 			\tName: {}
 			\tIP: {}
 			\tPort: {}""".format(n,tmp_name,tmp_ip,tmp_port))
-		tmp_choice = str(int(input("Choose a device.\n")))
+		tmp_choice = str(input("Choose a device.\n"))
 		try:
 			device = config['targets'][tmp_choice]
 		except:
 			print("Invalid ID! Please try again.")
 		else:
 			tmp_valid = True
+			ip = tmp_ip
+			port = tmp_port
+
+#client = udp_client.SimpleUDPClient(ip, port)
+def getch():
+    screen = curses.initscr()
+    print(screen.getch())
+
+
+while True:
+	getch()
+	#client.send_message("/chatbox/input", [ str(msgOutput), True, False])
