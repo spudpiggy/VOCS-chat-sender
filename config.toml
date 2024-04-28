@@ -1,14 +1,17 @@
+defaultDevice = 0
+# The device # to connect to by default.
+# Set to 0 to ask every time.
+
+
 [targets.1]
 name = "localhost"
 ip = "127.0.0.1"
 port = "9000"
+#Connect to this computer.
+# You probably don't need to change this
 
 [targets.2]
 name = "NAME"
 ip = "RECEIVER_IP_HERE"
 port = "9000"
 # Fill in name and ip with the name and IP of your receiving device.
-
-defaultDevice = 0
-# The device # to connect to by default.
-# Set to 0 to ask every time.
