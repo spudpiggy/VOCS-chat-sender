@@ -41,14 +41,14 @@ screen = curses.initscr()
 msg = []
 try:
 	while True:
-		tmp = screen.getkey()
-		if tmp == '\b':
+		tmp_key = screen.getkey()
+		if tmp_key == '\b':
 			try:
 				msg.pop()
 			except:
 				continue
 		else:
-			msg.append(tmp)
+			msg.append(tmp_key)
 		client.send_message("/chatbox/input", [ msg, True, False])
 finally:
 	curses.endwin()
