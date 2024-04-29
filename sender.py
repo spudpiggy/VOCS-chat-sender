@@ -10,7 +10,9 @@ with open('config.toml', 'rb') as f:
 	print("Loaded config!")
 
 if config['defaultDevice'] != 0:	# If a default is set
-	device = config['defaultDevice']
+	device = str(config['defaultDevice'])
+	ip = config['targets'][device]['ip']
+	port = config['targets'][device]['port']
 else:
 	tmp_valid = False
 	while not tmp_valid:
@@ -35,7 +37,18 @@ else:
 
 client = udp_client.SimpleUDPClient(ip, port)
 
-#screen = curses.initscr()
-while True:
-	msg = str(input(''))
-	client.send_message("/chatbox/input", [ msg, True, False])
+screen = curses.initscr()
+msg = []
+try:
+	while True:
+		tmp = screen.getkey()
+		if tmp == '\b':
+			try:
+				msg.pop()
+			except:
+				continue
+		else:
+			msg.append(tmp)
+		client.send_message("/chatbox/input", [ msg, True, False])
+finally:
+	curses.endwin()

@@ -1,4 +1,4 @@
-defaultDevice = 0
+defaultDevice = 1
 # The device # to connect to by default.
 # Set to 0 to ask every time.
 
@@ -11,7 +11,7 @@ port = 9000
 # You probably don't need to change this
 
 [targets.2]
-name = "NAME"
-ip = "RECEIVER_IP_HERE"
+name = "Quest 2"
+ip = "192.168.0.43"
 port = 9000
 # Fill in name and ip with the name and IP of your receiving device.
